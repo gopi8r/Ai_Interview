@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard — AI Interview Helper</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="page-shell">
+  <div style="max-width: 980px; width: 100%;">
+
+    <div class="brand-bar">
+      <div class="logo-badge">🛡️</div>
+      <div>
+        <div class="brand">Admin Dashboard</div>
+        <div class="tagline">Review candidate results & configure interviews</div>
+      </div>
+    </div>
+
+    <!-- ADMIN LOGIN -->
+    <section id="screen-admin-login" class="app-screen active">
+      <div class="glass-card" style="max-width: 420px; margin: 0 auto;">
+        <h4 class="mb-3 text-center">Admin Login</h4>
+        <label class="form-label">Email</label>
+        <input type="email" id="adminEmail" class="form-control" placeholder="admin@example.com" />
+        <label class="form-label">Password</label>
+        <input type="password" id="adminPassword" class="form-control" />
+        <button class="btn btn-brand w-100 mt-4" onclick="handleAdminLogin()">Login</button>
+        <p id="adminAuthError" class="text-danger mt-3 mb-0 d-none"></p>
+        <p class="text-center small text-muted mt-3">
+          <a href="index.html">← Back to candidate site</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ADMIN DASHBOARD -->
+    <section id="screen-dashboard" class="app-screen">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-white m-0">Candidate Results</h4>
+        <button class="btn btn-outline-light btn-sm" onclick="adminLogout()">Logout</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="row g-3 mb-4">
+        <div class="col-4">
+          <div class="stat-card">
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Total Interviews</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="stat-card">
+            <div class="stat-value" id="statAvgScore">--</div>
+            <div class="stat-label">Avg Overall Score</div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="stat-card">
+            <div class="stat-value" id="statHires">0</div>
+            <div class="stat-label">Hire / Strong Hire</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings panel -->
+      <div class="detail-panel mb-4">
+        <h6 class="mb-3">⚙️ Interview Settings</h6>
+        <div class="row align-items-end g-2">
+          <div class="col-auto">
+            <label class="form-label">Number of Questions per Interview</label>
+            <input type="number" id="questionLimitInput" class="form-control" min="1" max="20" style="width: 120px;" />
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-brand" onclick="saveSettings()">Save</button>
+          </div>
+          <div class="col-auto">
+            <span id="settingsSavedMsg" class="text-success small d-none">✓ Saved</span>
+          </div>
+        </div>
+        <p class="text-muted small mt-2 mb-0">
+          This controls how many AI-generated questions each new candidate receives (applies to future interviews only).
+        </p>
+      </div>
+
+      <!-- Candidates table -->
+      <div class="candidate-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Experience</th>
+              <th>Skills</th>
+              <th>Overall</th>
+              <th>Verdict</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="candidatesTableBody">
+            <!-- rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+      <p id="noCandidatesMsg" class="text-center text-white-50 mt-4 d-none">No interviews yet.</p>
+
+      <!-- Detail panel -->
+      <div id="detailSection" class="detail-panel mt-4 d-none">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <h5 id="detailName" class="mb-1"></h5>
+            <div class="text-muted small" id="detailEmail"></div>
+          </div>
+          <div>
+            <button class="btn btn-outline-brand btn-sm me-2" onclick="closeDetail()">Close</button>
+            <button class="btn btn-brand btn-sm" id="btnDownloadReport">⬇ Download PDF</button>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4"><strong>Overall:</strong> <span id="detailOverall"></span>/10</div>
+          <div class="col-4"><strong>Technical:</strong> <span id="detailTechnical"></span>/10</div>
+          <div class="col-4"><strong>Communication:</strong> <span id="detailCommunication"></span>/10</div>
+        </div>
+        <div id="detailAnswers"></div>
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

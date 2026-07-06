@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --grad-1: #7f5af0;
+  --grad-2: #ff6ec4;
+  --grad-3: #2cb1bc;
+  --grad-4: #ffb86b;
+  --ink: #1a1a2e;
+  --card-bg: rgba(255,255,255,0.92);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  color: #222;
+  background: #0d0b1e;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .brand { font-family: 'Sora', sans-serif; }
+
+/* ---------- Animated colorful background blobs ---------- */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  z-index: 0;
+  animation: float 14s ease-in-out infinite;
+}
+body::before {
+  width: 480px; height: 480px;
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+  top: -120px; left: -120px;
+}
+body::after {
+  width: 520px; height: 520px;
+  background: linear-gradient(135deg, var(--grad-3), var(--grad-4));
+  bottom: -140px; right: -140px;
+  animation-delay: 4s;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.08); }
+}
+
+/* ---------- Layout shells ---------- */
+.page-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+  padding: 40px;
+  width: 100%;
+}
+
+/* ---------- Navbar / brand ---------- */
+.brand-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  margin-bottom: 28px;
+}
+.brand-bar .logo-badge {
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 8px 20px rgba(127,90,240,0.4);
+}
+.brand-bar .brand { font-size: 21px; font-weight: 700; }
+.brand-bar .tagline { font-size: 13px; color: #cfcbe8; }
+
+/* ---------- Buttons ---------- */
+.btn-brand {
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+  color: #fff; border: none; border-radius: 12px;
+  padding: 12px 24px; font-weight: 600; font-size: 15px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-brand:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(127,90,240,0.4); color: #fff; }
+.btn-brand:disabled { opacity: 0.5; transform: none; box-shadow: none; }
+
+.btn-outline-brand {
+  background: transparent; border: 1.5px solid #d8dcee; color: #444;
+  border-radius: 12px; padding: 10px 20px; font-weight: 500;
+}
+.btn-outline-brand:hover { background: #f5f6fb; color: #222; }
+
+/* ---------- Form controls ---------- */
+.form-label { font-weight: 600; font-size: 13.5px; color: #333; margin-top: 12px; }
+.form-control, .form-select {
+  border-radius: 12px; border: 1.5px solid #e3e5ef; padding: 10px 14px; font-size: 14.5px;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--grad-1); box-shadow: 0 0 0 3px rgba(127,90,240,0.15);
+}
+
+/* ---------- Tabs ---------- */
+.pill-tabs { display: flex; background: #f2f3f9; border-radius: 14px; padding: 4px; margin-bottom: 24px; }
+.pill-tabs button {
+  flex: 1; border: none; background: transparent; padding: 10px; border-radius: 11px;
+  font-weight: 600; color: #777; cursor: pointer; transition: all 0.15s ease;
+}
+.pill-tabs button.active {
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(127,90,240,0.35);
+}
+
+/* ---------- Screens ---------- */
+.app-screen { display: none; width: 100%; }
+.app-screen.active { display: block; }
+
+/* ---------- Interview screen ---------- */
+.progress-pill {
+  display: inline-block; background: linear-gradient(135deg, #eef1ff, #f5e9ff); color: #6c3fd9;
+  padding: 6px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 700;
+}
+.timer-display { font-size: 30px; font-weight: 800; color: var(--grad-2); font-family: 'Sora', sans-serif; }
+.question-text { font-size: 21px; font-weight: 700; color: var(--ink); margin: 14px 0; }
+
+/* ---------- Avatar (replaces raw transcript display) ---------- */
+.avatar-stage {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 34px 0; margin-bottom: 8px;
+}
+.avatar-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-3));
+  box-shadow: 0 12px 30px rgba(127,90,240,0.35);
+  position: relative;
+  transition: background 0.3s ease;
+}
+.avatar-circle.state-speaking { background: linear-gradient(135deg, var(--grad-4), var(--grad-2)); }
+.avatar-circle.state-listening { background: linear-gradient(135deg, #ff6ec4, #7f5af0); }
+.avatar-circle.state-thinking { background: linear-gradient(135deg, #2cb1bc, #7f5af0); }
+.avatar-circle.state-done { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+
+.avatar-ring {
+  position: absolute; inset: -10px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,110,196,0.55);
+  opacity: 0;
+}
+.avatar-circle.state-listening .avatar-ring {
+  opacity: 1;
+  animation: ringPulse 1.4s ease-out infinite;
+}
+@keyframes ringPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+.avatar-caption { margin-top: 14px; font-size: 14px; font-weight: 600; color: #555; text-align: center; }
+
+/* ---------- Thank-you screen ---------- */
+.done-icon {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px; color: #fff; margin: 0 auto 20px;
+  box-shadow: 0 12px 30px rgba(46,204,113,0.35);
+}
+
+/* ---------- Admin dashboard ---------- */
+.stat-card {
+  background: var(--card-bg); backdrop-filter: blur(12px); border-radius: 18px; padding: 20px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12); text-align: center;
+}
+.stat-card .stat-value {
+  font-size: 30px; font-weight: 800; font-family: 'Sora', sans-serif;
+  background: linear-gradient(135deg, var(--grad-1), var(--grad-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-card .stat-label { font-size: 12.5px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.candidate-table { background: var(--card-bg); backdrop-filter: blur(12px); border-radius: 18px; overflow: hidden; box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+.candidate-table table { margin-bottom: 0; }
+.candidate-table th { background: rgba(127,90,240,0.06); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.03em; color: #6c3fd9; border-bottom: none; }
+.candidate-table td { vertical-align: middle; font-size: 14px; }
+
+.verdict-badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.verdict-strong-hire { background: #e3f9e5; color: #1e824c; }
+.verdict-hire { background: #e6f0ff; color: #1a5fb4; }
+.verdict-borderline { background: #fff4e0; color: #b26a00; }
+.verdict-no-hire { background: #fde8e8; color: #c0392b; }
+.verdict-pending { background: #eee; color: #888; }
+
+.skills-chip {
+  display: inline-block; background: linear-gradient(135deg, #eef1ff, #f5e9ff);
+  color: #6c3fd9; padding: 3px 11px; border-radius: 12px; font-size: 11.5px; margin: 2px; font-weight: 600;
+}
+
+.detail-panel { background: var(--card-bg); backdrop-filter: blur(12px); border-radius: 18px; padding: 24px; box-shadow: 0 10px 28px rgba(0,0,0,0.12); }
+.qa-block { border: 1px solid #eee; border-radius: 14px; padding: 16px; margin-bottom: 14px; background: #fff; }
+.qa-block .qa-scores { font-size: 12.5px; color: #666; margin: 6px 0; }
+.qa-block .qa-missed { font-size: 12.5px; color: #c0392b; margin-top: 6px; }

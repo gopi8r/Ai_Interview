@@ -1,0 +1,27 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# Database
+sqlalchemy==2.0.35
+pymysql==1.1.1
+cryptography==43.0.1
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-multipart==0.0.9
+
+# Config
+python-dotenv==1.0.1
+pydantic[email]>=2.10.0
+
+# Speech-to-text (Whisper, local inference)
+openai-whisper
+torch
+
+# LLM (Groq - free tier, much higher daily limits than Gemini's free tier)
+groq==0.11.0
+
+# PDF generation
+reportlab==4.2.5
